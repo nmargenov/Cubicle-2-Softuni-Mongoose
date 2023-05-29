@@ -10,4 +10,7 @@ function createAccessory(name,description,imageUrl){
     Accessory.create(accessory);
 }
 
-module.exports = {createAccessory};
+function getAllAccessories(){
+    return Accessory.find();
+}
+module.exports = {createAccessory,getAllAccessories};

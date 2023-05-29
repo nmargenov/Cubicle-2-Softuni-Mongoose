@@ -1,4 +1,4 @@
-const { createCube } = require('../managers/cubeManager');
+const { createCube, getCubeByID } = require('../managers/cubeManager');
 
 const router = require('express').Router();
 
@@ -24,9 +24,12 @@ router.post('/create',async (req,res)=>{
     res.redirect(`/cubes/${newCube._id}/details`);
 }); 
 
-router.get('/:cubeID/details',(req,res)=>{
+router.get('/:cubeID/details',async (req,res)=>{
+    const cubeID = req.params.cubeID;
+    const cube = await getCubeByID(cubeID).lean();
+    console.log(cube);
     res.status(302);
-    res.render('cube/details');
+    res.render('cube/details',{cube});
 });
 
 

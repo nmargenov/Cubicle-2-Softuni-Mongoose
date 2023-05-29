@@ -16,4 +16,8 @@ function getAllCubes(){
     return Cube.find();
 }
 
-module.exports = {createCube,getAllCubes}
+function getCubeByID(cubeID){
+    return Cube.findById(cubeID);
+}
+
+module.exports = {createCube,getAllCubes,getCubeByID}

@@ -5,4 +5,10 @@ router.get('/create',(req,res)=>{
     res.render('cube/create');
 });
 
+router.post('/create',(req,res)=>{
+    console.log(req.body);
+    res.end();
+}); 
+
+
 module.exports = router;

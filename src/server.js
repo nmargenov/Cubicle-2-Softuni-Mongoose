@@ -14,7 +14,16 @@ connectToDb()
     .catch(err =>{console.log('Error connecting to the DB: ',err)});
 
 app.get(['/','/index'],(req,res)=>{
+    res.status(302);
     res.render('index');
+})
+app.get('/about',(req,res)=>{
+    res.status(302);
+    res.render('about');
+})
+app.get('*',(req,res)=>{
+    res.status(404);
+    res.render('404');
 })
 
 const PORT = 5000;

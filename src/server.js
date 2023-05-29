@@ -13,9 +13,8 @@ connectToDb()
     .then(console.log('Connection to DB is successful!'))
     .catch(err =>{console.log('Error connecting to the DB: ',err)});
 
-app.get('/',(req,res)=>{
-    res.write('Server is working properly!');
-    res.end();
+app.get(['/','/index'],(req,res)=>{
+    res.render('index');
 })
 
 const PORT = 5000;

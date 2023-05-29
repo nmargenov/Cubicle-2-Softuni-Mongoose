@@ -20,8 +20,13 @@ function getCubeByID(cubeID){
     return Cube.findById(cubeID);
 }
 
+function getCubeByIDWithAccessories(cubeID){
+    return Cube.findById(cubeID).populate('accessories');
+
+}
+
 function addAccessoryToCube(cubeID,accessoryID){
     return Cube.findByIdAndUpdate(cubeID,{$push:{accessories:accessoryID}});
 }
 
-module.exports = {createCube,getAllCubes,getCubeByID,addAccessoryToCube}
+module.exports = {createCube,getAllCubes,getCubeByID,addAccessoryToCube,getCubeByIDWithAccessories}

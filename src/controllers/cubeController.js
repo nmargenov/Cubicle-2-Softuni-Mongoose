@@ -1,4 +1,4 @@
-const { getAllAccessories } = require('../managers/accessoryManager');
+const { getAllAccessories, getRemainingAccessories } = require('../managers/accessoryManager');
 const { createCube, getCubeByID, addAccessoryToCube, getCubeByIDWithAccessories } = require('../managers/cubeManager');
 
 const router = require('express').Router();
@@ -38,7 +38,7 @@ router.get('/:cubeID/accessories/attach',async(req,res)=>{
     const cubeID = req.params.cubeID;
 
     const cube = await getCubeByID(cubeID).lean();
-    const accessories = await getAllAccessories().lean();
+    const accessories = await getRemainingAccessories(cube.accessories).lean();
     const hasAccessories = accessories.length;
 
     res.status(302);

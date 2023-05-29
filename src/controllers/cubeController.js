@@ -1,5 +1,5 @@
 const { getAllAccessories } = require('../managers/accessoryManager');
-const { createCube, getCubeByID } = require('../managers/cubeManager');
+const { createCube, getCubeByID, addAccessoryToCube } = require('../managers/cubeManager');
 
 const router = require('express').Router();
 
@@ -41,6 +41,15 @@ router.get('/:cubeID/accessories/attach',async(req,res)=>{
 
     res.status(302);
     res.render('cube/attach',{cube,accessories,hasAccessories});
+});
+
+router.post('/:cubeID/accessories/attach',async(req,res)=>{
+    const cubeID = req.params.cubeID;
+    const accessoryID = req.body.accessory;
+
+    const cube = await addAccessoryToCube(cubeID,accessoryID); 
+
+    res.redirect(`/cubes/${cube._id}/details`);
 });
 
 module.exports = router;

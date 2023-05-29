@@ -12,4 +12,8 @@ function createCube(name,description,imageUrl,difficultyLevel){
     return newCube;
 }
 
-module.exports = {createCube}
+function getAllCubes(){
+    return Cube.find();
+}
+
+module.exports = {createCube,getAllCubes}

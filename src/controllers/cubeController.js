@@ -24,5 +24,10 @@ router.post('/create',async (req,res)=>{
     res.redirect(`/cubes/${newCube._id}/details`);
 }); 
 
+router.get('/:cubeID/details',(req,res)=>{
+    res.status(302);
+    res.render('cube/details');
+});
+
 
 module.exports = router;

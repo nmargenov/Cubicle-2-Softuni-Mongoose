@@ -27,7 +27,16 @@ router.post('/create',async (req,res)=>{
 
 router.get('/:cubeID/details',async (req,res)=>{
     const cubeID = req.params.cubeID;
-    const cube = await getCubeByIDWithAccessories(cubeID).lean();
+    const cube = await getCubeByIDWithAccessories(cubeID)
+     ? await getCubeByIDWithAccessories(cubeID).lean() 
+     : false;
+
+    if(!cube){
+        res.status(404);
+        res.render('404');
+        return;
+    }
+
     const accessories = cube.accessories;
     const hasAccessories = accessories.length;
     res.status(302);
@@ -37,7 +46,16 @@ router.get('/:cubeID/details',async (req,res)=>{
 router.get('/:cubeID/accessories/attach',async(req,res)=>{
     const cubeID = req.params.cubeID;
 
-    const cube = await getCubeByID(cubeID).lean();
+    const cube = await getCubeByID(cubeID)
+    ? await getCubeByID(cubeID).lean()
+    : false;
+
+    if(!cube){
+        res.status(404);
+        res.render('404');
+        return;
+    }
+    
     const accessories = await getRemainingAccessories(cube.accessories).lean();
     const hasAccessories = accessories.length;
 
